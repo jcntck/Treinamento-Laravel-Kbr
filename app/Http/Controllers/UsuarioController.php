@@ -61,8 +61,8 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nome' => 'required',
-            'email' => 'required|email|unique:usuarios',
+            'nome' => 'required|max:255',
+            'email' => 'required|email|unique:usuarios|max:100',
             'nascimento' => 'required|date',
             'img' => 'image'
         ]);
@@ -115,14 +115,24 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nome' => 'required',
-            'email' => 'required|email',
-            'nascimento' => 'required|date',
-            'img' => 'image'
-        ]);
-
         $usuario = Usuario::findOrFail($id);
+        
+        if($usuario->email != $request->get('email')) {
+            $validator = $request->validate([
+                'nome' => 'required|max:255',
+                'email' => 'required|email|unique:usuarios|max:100',
+                'nascimento' => 'required|date',
+                'img' => 'image'
+            ]);
+        } else {
+            $validator = $request->validate([
+                'nome' => 'required|max:255',
+                'email' => 'required|email|max:100',
+                'nascimento' => 'required|date',
+                'img' => 'image'
+            ]);
+        }
+
         $usuario->nome = $request->get('nome');
         $usuario->email = $request->get('email');
         $usuario->dt_nascimento = $request->get('nascimento');

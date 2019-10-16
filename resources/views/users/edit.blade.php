@@ -18,11 +18,11 @@
         {{ csrf_field() }}
         <div class="form-group">
             <label for="nome">Nome:</label>
-            <input type="text" class="form-control" id="nome" name="nome" value="{{ $usuario->nome }}">
+            <input type="text" class="form-control" id="nome" name="nome" maxlength="255" value="{{ $usuario->nome }}">
         </div>
         <div class="form-group">
             <label for="email">Endereço de Email:</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ $usuario->email }}">
+            <input type="email" class="form-control" id="email" name="email" maxlength="100" value="{{ $usuario->email }}">
         </div>
         <div class="form-group">
             <label for="nascimento">Data de nascimento:</label>
@@ -37,10 +37,17 @@
                 @endforeach
             </select>
         </div>
-        <div class="form-group">
-            <label for="img">Foto de perfil:</label>
+        <p>Alterar foto de perfil:</p>
+        <div class="d-flex border p-sm-2 mb-1">
+        @if($usuario->ft)
+        <div class="edit-ft">
+            <img src='{{ url("public/images/{$usuario->ft}") }}' class="img-fluid mr-3" width="100" alt="Foto atual" title="Foto atual">
+        </div>
+        @endif
+        <div class="form-inline">
             <input type="file" class="form-control-file" id="img" name="img" aria-describedby="imgHelp" accept="image/*">
             <small id="imgHelp" class="form-text text-danger">Este campo é opcional.</small>
+        </div>
         </div>
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>

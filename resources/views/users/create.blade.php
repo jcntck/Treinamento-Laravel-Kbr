@@ -1,5 +1,4 @@
 @extends('layout')
-
 @section('content')
 @if ($errors->any())
 <div class="alert alert-danger m-2">
@@ -17,22 +16,22 @@
         {{ csrf_field() }}
         <div class="form-group">
             <label for="nome">Nome:</label>
-            <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome completo">
+            <input type="text" class="form-control" id="nome" name="nome" maxlenth="255" placeholder="Digite seu nome"  @if(!$errors->has('nome')) value="{{ old('nome') }}" @endif>
         </div>
         <div class="form-group">
             <label for="email">Endereço de Email:</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email">
+            <input type="email" class="form-control" id="email" name="email" maxlength="100" placeholder="Digite seu email" @if(!$errors->has('email')) value="{{ old('email') }}" @endif>
         </div>
         <div class="form-group">
             <label for="nascimento">Data de nascimento:</label>
-            <input type="date" class="form-control" id="nascimento" name="nascimento" placeholder="Digite sua data de nascimento">
+            <input type="date" class="form-control" id="nascimento" name="nascimento" placeholder="Digite sua data de nascimento" @if(!$errors->has('nascimento')) value="{{ old('nascimento') }}" @endif">
         </div>
         <div class="form-group">
             <label for="categoria">Categoria pertencente:</label>
             <select name="categoria" id="categoria" class="custom-select">
                 <option value="" selected>-- Categorias --</option>
                 @foreach($categorias as $categoria)
-                <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
+                <option @if(old('categoria') == $categoria->id) {{'selected="selected"'}} @endif value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
                 @endforeach
             </select>
         </div>

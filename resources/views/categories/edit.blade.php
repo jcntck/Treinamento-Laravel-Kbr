@@ -15,7 +15,7 @@
 <form method="post" action="{{ route('categories.update', $categoria->id ) }}" enctype="multipart/form-data">
     @method('PATCH')
     {{ csrf_field() }}
-    <div class="form-group mx-auto w-50">
+    <div class="form-group mx-auto w-75">
         <label for="nome">Nome:</label>
         <input type="text" class="form-control" id="nome" name="nome" value="{{ $categoria->nome }}">
         <button type="submit" class="btn btn-primary mt-2">Enviar</button>

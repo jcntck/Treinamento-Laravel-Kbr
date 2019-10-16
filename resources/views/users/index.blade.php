@@ -12,13 +12,13 @@
 @endif
 <div class="my-3">
     <h2 class="mt-2 mb-3 d-inline">Usuários</h2>
-    <form action="{{ route('users.index') }}" role="search" class="form-inline float-right">
-        <input class="form-control" name="search" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-primary mx-1" type="submit"><i class="fas fa-search"></i></button>
+    <form action="{{ route('users.index') }}" role="search" class="form-inline float-sm-right mt-3 mt-sm-0">
+        <input class="form-control w-75 w-sm-100 mr-2" name="search" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-primary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
     </form>
 </div>
 @if(count($usuarios) > 0)
-<table class="table table-striped  mt-3">
+<table class="table table-striped table-responsive mt-3">
     <thead>
         <tr>
             <td>Imagem</td>
@@ -34,9 +34,9 @@
             @foreach($usuarios as $usuario)
             <tr>
                 @if($usuario->thumb)
-                <td><img src='{{ url("thumbnail/{$usuario->thumb}") }}' alt="Imagem de perfil do {{ $usuario->nome }}" title="Imagem de perfil do {{ $usuario->nome }}" class="img-thumbnail"></td>
+                <td><img src='{{ url("public/thumbnail/{$usuario->thumb}") }}' alt="Imagem de perfil do {{ $usuario->nome }}" title="Imagem de perfil do {{ $usuario->nome }}" class="img-thumbnail"></td>
                 @else
-                <td><img src='{{ url("thumbnail/default.jpg") }}' alt="Sem foto de perfil" title="Sem foto de perfil" class="img-thumbnail"></td>
+                <td><img src='{{ url("public/thumbnail/default.jpg") }}' alt="Sem foto de perfil" title="Sem foto de perfil" class="img-thumbnail"></td>
                 @endif
                 <td class="align-middle">{{ $usuario->nome }}</td>
                 <td class="align-middle">{{ $usuario->email }}</td>
@@ -46,7 +46,7 @@
                 @else
                 <td class="text-center align-middle"> - </td>
                 @endif
-                <td class="text-muted align-middle"><small>{{ \Carbon\Carbon::parse($usuario->created_at)->format('d/m/Y  g:i:s a') }}</small></td>
+                <td class="text-muted align-middle"><small>{{ \Carbon\Carbon::parse($usuario->created_at)->format('d/m/Y  G:i ') }}BRT</small></td>
                 <td><a href="{{ route('users.edit', $usuario->id) }}" class="btn btn-outline-secondary" title="Editar usuário"><i class="fas fa-user-edit"></i></a></td>
                 <td><a href="{{ route('users.show', $usuario->id) }}" class="btn btn-outline-info" title="Vizualizar usuário"><i class="fas fa-search-plus"></i></a></td>
                 <td>
